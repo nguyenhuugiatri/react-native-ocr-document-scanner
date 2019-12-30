@@ -8,6 +8,8 @@ import ScanbotSDK, {
 } from 'react-native-scanbot-sdk';
 import {connect} from 'react-redux';
 
+import * as actionType from './../../redux/actionType';
+
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'OCR SCANNER',
@@ -48,6 +50,10 @@ class HomeScreen extends Component {
       multiPageEnabled: true,
       ignoreBadAspectRatio: true,
     });
+    if (result.status === 'OK') {
+      this.props.addScannedPages(result.pages);
+      this.gotoImageResults();
+    }
   };
 }
 
@@ -58,4 +64,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+const mapDispatchToProps = dispatch => {
+  return {
+    addScannedPages: (pages: Page[]) =>
+      dispatch({type: actionType.ACTION_ADD_PAGES, pages: pages}),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(HomeScreen);

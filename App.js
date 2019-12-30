@@ -6,7 +6,7 @@ import ScanbotSDK from 'react-native-scanbot-sdk';
 import {Provider} from 'react-redux';
 import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 
-import Store from './Store';
+import Store from './src/redux/store';
 import HomeScreen from './src/components/screens/HomeScreen';
 
 const SDK_LICENSE_KEY =
