@@ -23,19 +23,19 @@ class HomeScreen extends Component {
             block
             style={styles.button}
             onPress={this.startDocumentScannerButtonTapped}>
-            <Text>Scan Documents</Text>
+            <Text style={styles.text}>Scan Documents</Text>
           </Button>
           <Button block style={styles.button}>
-            <Text>Do later</Text>
+            <Text style={styles.text}>Do later</Text>
           </Button>
           <Button block style={styles.button}>
-            <Text>Do later</Text>
+            <Text style={styles.text}>Do later</Text>
           </Button>
           <Button block style={styles.button}>
-            <Text>Do later</Text>
+            <Text style={styles.text}>Do later</Text>
           </Button>
           <Button block style={styles.button}>
-            <Text>Do later</Text>
+            <Text style={styles.text}>Do later</Text>
           </Button>
         </Content>
       </Container>
@@ -66,6 +66,11 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#8bbabb',
     margin: 10,
+  },
+  text: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#ededed',
   },
 });
 

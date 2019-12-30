@@ -8,14 +8,17 @@ import {
   Footer,
   Right,
   Left,
+  FooterTab,
 } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {connect} from 'react-redux';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
 
+import * as actionType from './../../redux/actionType';
+
 class ImageResultsScreen extends Component {
   static navigationOptions = {
-    title: 'Image Results',
+    title: 'Gallery',
   };
 
   constructor(props) {
@@ -46,21 +49,14 @@ class ImageResultsScreen extends Component {
           </View>
         </Content>
         <Footer>
-          <Left>
-            <Button transparent>
-              <Text>Save as PDF</Text>
+          <FooterTab>
+            <Button style={styles.button}>
+              <Text style={styles.text}>Save as PDF</Text>
             </Button>
-          </Left>
-          <Left>
-            <Button transparent>
-              <Text>Save as TIFF</Text>
+            <Button style={styles.button} onPress={this.deleteAllButtonTapped}>
+              <Text style={styles.text}>Delete All</Text>
             </Button>
-          </Left>
-          <Right>
-            <Button transparent>
-              <Text>Delete All</Text>
-            </Button>
-          </Right>
+          </FooterTab>
         </Footer>
       </Container>
     );
@@ -79,6 +75,11 @@ class ImageResultsScreen extends Component {
     }
   }
 
+  deleteAllButtonTapped = async () => {
+    this.props.removeAllScannedPages();
+    await ScanbotSDK.cleanup();
+  };
+
   showSpinner() {
     this.setState({spinnerVisible: true});
   }
@@ -95,8 +96,8 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   galleryImage: {
-    width: 100,
-    height: 100,
+    width: 110,
+    height: 110,
     resizeMode: 'contain',
     margin: 10,
   },
@@ -104,6 +105,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
   },
+  text: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#ededed',
+  },
+  button: {
+    backgroundColor: '#464159',
+  },
 });
 
-export default ImageResultsScreen;
+const mapStateToProps = (state: ScannedPagesState) => {
+  return {
+    scannedPages: state.pages,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removeAllScannedPages: () =>
+      dispatch({type: actionType.ACTION_REMOVE_ALL_PAGES}),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageResultsScreen);
