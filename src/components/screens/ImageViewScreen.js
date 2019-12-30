@@ -57,7 +57,9 @@ class ImageViewScreen extends Component {
         <Footer>
           <FooterTab>
             <Button style={styles.button}>
-              <Text style={styles.text}>Crop</Text>
+              <Text style={styles.text} onPress={this.cropButtonTapped}>
+                Crop
+              </Text>
             </Button>
             <Button style={styles.button}>
               <Text style={styles.text}>OCR</Text>
@@ -70,6 +72,20 @@ class ImageViewScreen extends Component {
       </Container>
     );
   }
+
+  cropButtonTapped = async () => {
+    const {page} = this.state;
+    const result = await ScanbotSDK.UI.startCroppingScreen(page, {
+      doneButtonTitle: 'Apply',
+      topBarBackgroundColor: '#6c7b95',
+      bottomBarBackgroundColor: '#6c7b95',
+    });
+
+    if (result.status === 'OK') {
+      this.setState({page: result.page});
+      this.props.updateScannedPage(result.page);
+    }
+  };
 
   deleteButtonTapped = async () => {
     const {page} = this.state;
@@ -128,6 +144,8 @@ const mapDispatchToProps = dispatch => {
   return {
     removeScannedPage: (page: Page) =>
       dispatch({type: actionType.ACTION_REMOVE_PAGE, page: page}),
+    updateScannedPage: (page: Page) =>
+      dispatch({type: actionType.ACTION_UPDATE_OR_ADD_PAGE, page: page}),
   };
 };
 
