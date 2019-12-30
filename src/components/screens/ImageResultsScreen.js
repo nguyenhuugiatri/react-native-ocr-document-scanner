@@ -1,15 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, StyleSheet, View, TouchableOpacity, Image} from 'react-native';
-import {
-  Button,
-  Container,
-  Content,
-  Text,
-  Footer,
-  Right,
-  Left,
-  FooterTab,
-} from 'native-base';
+import {Button, Container, Content, Text, Footer, FooterTab} from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {connect} from 'react-redux';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
@@ -67,7 +58,7 @@ class ImageResultsScreen extends Component {
   renderThumbnails(pages: Page[]) {
     if (pages) {
       return pages.map((p, i) => (
-        <TouchableOpacity key={i}>
+        <TouchableOpacity key={i} onPress={() => this.gotoImageView(p)}>
           <Image
             style={styles.galleryImage}
             source={{uri: `${p.documentPreviewImageFileUri}?${Date.now()}`}}
@@ -121,6 +112,10 @@ class ImageResultsScreen extends Component {
       Alert.alert(title, message);
     }
   }
+
+  gotoImageView = (page: Page) => {
+    this.props.navigation.push('ImageView', {page: page});
+  };
 
   showSpinner() {
     this.setState({spinnerVisible: true});
