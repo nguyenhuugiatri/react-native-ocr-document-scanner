@@ -51,7 +51,9 @@ class ImageResultsScreen extends Component {
         <Footer>
           <FooterTab>
             <Button style={styles.button}>
-              <Text style={styles.text}>Save as PDF</Text>
+              <Text style={styles.text} onPress={this.saveAsPdfButtonTapped}>
+                Save as PDF
+              </Text>
             </Button>
             <Button style={styles.button} onPress={this.deleteAllButtonTapped}>
               <Text style={styles.text}>Delete All</Text>
@@ -79,6 +81,46 @@ class ImageResultsScreen extends Component {
     this.props.removeAllScannedPages();
     await ScanbotSDK.cleanup();
   };
+
+  checkImages(): boolean {
+    const {scannedPages} = this.props;
+    if (scannedPages.length > 0) {
+      return true;
+    }
+    this.showAlert(
+      'Warning !',
+      'Your gallery is empty. Please scan some images.',
+    );
+    return false;
+  }
+
+  saveAsPdfButtonTapped = async () => {
+    if (!this.checkImages()) {
+      return;
+    }
+
+    const {scannedPages} = this.props;
+    this.showSpinner();
+    try {
+      const imageUris = scannedPages.map(
+        p => p.documentImageFileUri || p.originalImageFileUri,
+      );
+      const result = await ScanbotSDK.createPDF(imageUris, 'FIXED_A4');
+      this.showAlert('PDF file created', result.pdfFileUri, true);
+    } finally {
+      this.hideSpinner();
+    }
+  };
+
+  showAlert(title: string, message: string, delayed: boolean = false) {
+    if (delayed) {
+      setTimeout(() => {
+        Alert.alert(title, message);
+      }, 200);
+    } else {
+      Alert.alert(title, message);
+    }
+  }
 
   showSpinner() {
     this.setState({spinnerVisible: true});
