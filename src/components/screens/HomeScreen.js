@@ -25,8 +25,11 @@ class HomeScreen extends Component {
             onPress={this.startDocumentScannerButtonTapped}>
             <Text style={styles.text}>Scan Documents</Text>
           </Button>
-          <Button block style={styles.button}>
-            <Text style={styles.text}>Do later</Text>
+          <Button
+            block
+            style={styles.button}
+            onPress={this.viewImageResultsButtonTapped}>
+            <Text style={styles.text}>Gallery</Text>
           </Button>
           <Button block style={styles.button}>
             <Text style={styles.text}>Do later</Text>
@@ -41,6 +44,10 @@ class HomeScreen extends Component {
       </Container>
     );
   }
+
+  viewImageResultsButtonTapped = async () => {
+    this.gotoImageResults();
+  };
 
   startDocumentScannerButtonTapped = async () => {
     const result = await ScanbotSDK.UI.startDocumentScanner({

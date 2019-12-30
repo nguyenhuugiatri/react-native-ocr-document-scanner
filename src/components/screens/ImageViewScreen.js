@@ -1,15 +1,6 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, View, Dimensions, Alert} from 'react-native';
-import {
-  Container,
-  Content,
-  Text,
-  Footer,
-  Button,
-  Left,
-  Right,
-  FooterTab,
-} from 'native-base';
+import {Container, Content, Text, Footer, Button, FooterTab} from 'native-base';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
@@ -61,7 +52,7 @@ class ImageViewScreen extends Component {
                 Crop
               </Text>
             </Button>
-            <Button style={styles.button}>
+            <Button style={styles.button} onPress={this.performOcrButtonTapped}>
               <Text style={styles.text}>OCR</Text>
             </Button>
             <Button style={styles.button} onPress={this.deleteButtonTapped}>
@@ -72,6 +63,22 @@ class ImageViewScreen extends Component {
       </Container>
     );
   }
+
+  performOcrButtonTapped = async () => {
+    const {page} = this.state;
+    this.showSpinner();
+    try {
+      const imageUris = [
+        page.documentImageFileUri || page.originalImageFileUri,
+      ];
+      const result = await ScanbotSDK.performOCR(imageUris, ['en', 'de'], {
+        outputFormat: 'PLAIN_TEXT',
+      });
+      this.showAlert('OCR Result', result.plainText, true);
+    } finally {
+      this.hideSpinner();
+    }
+  };
 
   cropButtonTapped = async () => {
     const {page} = this.state;
