@@ -8,6 +8,7 @@ import {DocumentDirectoryPath, ExternalDirectoryPath} from 'react-native-fs';
 
 import Store from './src/redux/store';
 import HomeScreen from './src/components/screens/HomeScreen';
+import ImageResultsScreen from './src/components/screens/ImageResultsScreen';
 
 const SDK_LICENSE_KEY =
   'Rn4S4wfk3OluZ2iIzswWpWrPt7ktmS' +
@@ -28,6 +29,7 @@ const SDK_LICENSE_KEY =
 const MainStack = createStackNavigator(
   {
     Home: HomeScreen,
+    ImageResults: ImageResultsScreen,
   },
   {
     initialRouteName: 'Home',

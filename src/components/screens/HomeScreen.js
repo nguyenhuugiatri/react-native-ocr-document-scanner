@@ -41,6 +41,7 @@ class HomeScreen extends Component {
       </Container>
     );
   }
+
   startDocumentScannerButtonTapped = async () => {
     const result = await ScanbotSDK.UI.startDocumentScanner({
       polygonColor: '#00ffff',
@@ -54,6 +55,10 @@ class HomeScreen extends Component {
       this.props.addScannedPages(result.pages);
       this.gotoImageResults();
     }
+  };
+
+  gotoImageResults = () => {
+    this.props.navigation.push('ImageResults');
   };
 }
 
