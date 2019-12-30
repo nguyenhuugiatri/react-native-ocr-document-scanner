@@ -13,6 +13,8 @@ const reducer = (state: ScannedPagesState = {pages: []}, action) => {
       return addPages(action.pages, state);
     case actionType.ACTION_REMOVE_ALL_PAGES:
       return removeAllPages();
+    case actionType.ACTION_REMOVE_PAGE:
+      return removePage(action.page, state);
     default:
       return state;
   }
@@ -24,6 +26,16 @@ function addPages(pages: Page[], state: ScannedPagesState): ScannedPagesState {
 
 function removeAllPages(): ScannedPagesState {
   return {pages: []};
+}
+
+function removePage(page: Page, state: ScannedPagesState): ScannedPagesState {
+  let pages = state.pages;
+  const index = pages.findIndex(p => p.pageId === page.pageId);
+  if (index !== -1) {
+    pages = [...pages];
+    pages.splice(index, 1);
+  }
+  return {pages};
 }
 
 export default createStore(reducer);

@@ -14,6 +14,8 @@ import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
 
+import * as actionType from './../../redux/actionType';
+
 class ImageViewScreen extends Component {
   static navigationOptions = {
     title: 'Detail',
@@ -60,7 +62,7 @@ class ImageViewScreen extends Component {
             <Button style={styles.button}>
               <Text style={styles.text}>OCR</Text>
             </Button>
-            <Button style={styles.button}>
+            <Button style={styles.button} onPress={this.deleteButtonTapped}>
               <Text style={styles.text}>Delete</Text>
             </Button>
           </FooterTab>
@@ -68,6 +70,17 @@ class ImageViewScreen extends Component {
       </Container>
     );
   }
+
+  deleteButtonTapped = async () => {
+    const {page} = this.state;
+    this.props.removeScannedPage(page);
+    await ScanbotSDK.removePage(page);
+    this.gotoImageResults();
+  };
+
+  gotoImageResults = () => {
+    this.props.navigation.pop();
+  };
 
   showSpinner() {
     this.setState({spinnerVisible: true});
@@ -111,4 +124,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, null)(ImageViewScreen);
+const mapDispatchToProps = dispatch => {
+  return {
+    removeScannedPage: (page: Page) =>
+      dispatch({type: actionType.ACTION_REMOVE_PAGE, page: page}),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ImageViewScreen);

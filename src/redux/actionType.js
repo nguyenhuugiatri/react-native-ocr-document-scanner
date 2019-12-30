@@ -1,2 +1,3 @@
 export const ACTION_ADD_PAGES = 'ADD_PAGES';
 export const ACTION_REMOVE_ALL_PAGES = 'REMOVE_ALL_PAGES';
+export const ACTION_REMOVE_PAGE = 'REMOVE_PAGE';
