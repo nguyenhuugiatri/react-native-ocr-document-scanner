@@ -47,6 +47,9 @@ class ImageViewScreen extends Component {
         </Content>
         <Footer>
           <FooterTab>
+            <Button style={styles.button} onPress={this.saveAsPdfButtonTapped}>
+              <Text style={styles.text}>Save as PDF</Text>
+            </Button>
             <Button style={styles.button}>
               <Text style={styles.text} onPress={this.cropButtonTapped}>
                 Crop
@@ -63,6 +66,19 @@ class ImageViewScreen extends Component {
       </Container>
     );
   }
+
+  saveAsPdfButtonTapped = async () => {
+    const {page} = this.state;
+    this.showSpinner();
+    try {
+      const imageUri = page.documentImageFileUri || page.originalImageFileUri;
+      const imageUriArray = [imageUri];
+      const result = await ScanbotSDK.createPDF(imageUriArray, 'FIXED_A4');
+      this.showAlert('PDF file created', result.pdfFileUri, true);
+    } finally {
+      this.hideSpinner();
+    }
+  };
 
   performOcrButtonTapped = async () => {
     const {page} = this.state;

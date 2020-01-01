@@ -97,9 +97,9 @@ export default class App extends Component {
 
   getCustomStoragePath(): string {
     if (Platform.OS === 'ios') {
-      return DocumentDirectoryPath + '/OCRScaner-storage';
+      return DocumentDirectoryPath;
     } else if (Platform.OS === 'android') {
-      return ExternalDirectoryPath + '/OCRScaner-storage';
+      return ExternalDirectoryPath;
     }
     return null;
   }

@@ -43,7 +43,7 @@ class ImageResultsScreen extends Component {
           <FooterTab>
             <Button style={styles.button}>
               <Text style={styles.text} onPress={this.saveAsPdfButtonTapped}>
-                Save as PDF
+                Save all as PDF
               </Text>
             </Button>
             <Button style={styles.button} onPress={this.deleteAllButtonTapped}>
