@@ -71,7 +71,7 @@ class ImageViewScreen extends Component {
       const imageUris = [
         page.documentImageFileUri || page.originalImageFileUri,
       ];
-      const result = await ScanbotSDK.performOCR(imageUris, ['en', 'de'], {
+      const result = await ScanbotSDK.performOCR(imageUris, ['vi', 'en'], {
         outputFormat: 'PLAIN_TEXT',
       });
       this.showAlert('OCR Result', result.plainText, true);
