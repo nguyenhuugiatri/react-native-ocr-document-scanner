@@ -12,20 +12,21 @@ import ImageResultsScreen from './src/components/screens/ImageResultsScreen';
 import ImageViewScreen from './src/components/screens/ImageViewScreen';
 
 const SDK_LICENSE_KEY =
-  'Rn4S4wfk3OluZ2iIzswWpWrPt7ktmS' +
-  'bMfxWYP/xknWtUJbx4NvRbonOO3rYd' +
-  'JVMnfBrPkxeVZfpXPevPV+TfR6hdgT' +
-  'cxvAyE8n4SNUvaIfkubVkxDNqI7SRy' +
-  'C5mOsRbsvysu3rPJ6S13/OWA9plp32' +
-  '/J3h7XjYZD9T6tocAQT6ZmgJuq9a9J' +
-  '33VlY87EEzGbY1+DRrllPGsafDGDsL' +
-  '16m9Y3k7dOj0ft/K1N4oCK76kGn/2t' +
-  '6BRX/SepbBH4H9I+6p2ro9xW0jW2IN' +
-  'oPqHF6sCAKt7duW5SSkqewmmeRpWv9' +
-  'BGmsvc5q1sNFAYRsS7O+BSQGIJ5Cj3' +
-  'zbeYvADE9zLA==\nU2NhbmJvdFNESw' +
+  'mUI1geNDOHudUYHokX4EyschlOqx6D' +
+  'W0GfC6780kn3QY0as+AInBwxmU0tQj' +
+  'yg/16DSUJr2tY6kUxeYZi1x2t2GxYW' +
+  '76jewc10Y6fozXXk6GEq6D/hhD+F6O' +
+  '3HsdCWJwZTraX9YzmeEbkC5d4TqCrJ' +
+  '0iBL/weIUY38f3TQJ/mngTNXfa1p6B' +
+  '+ycvYbNnG6i06IKHHQX75GtRnJRntx' +
+  'i1xViQl+E2qsBTD2cTfhXLGdPGVjWp' +
+  '78BezY9mDonlBKdG4v+IqBRksyc9gG' +
+  'EjajrGXMOhDzj10/H30ScDWTOoQOku' +
+  'ebeOBfE1uZ5afGNe8Pv/Q4dCabtPto' +
+  '74n87gLPFJlQ==\nU2NhbmJvdFNESw' +
   'pjb20uaGNtdXNfbm1jbnBtX29jcnNj' +
-  'YW4KMTU4MDQyODc5OQo1OTAKMw==\n';
+  'YW5uZXIKMTU4MDQyODc5OQoxMDcxMD' +
+  'IKMw==\n';
 
 const MainStack = createStackNavigator(
   {

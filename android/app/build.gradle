@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hcmus_nmcnpm_ocrscan"
+        applicationId "com.hcmus_nmcnpm_ocrscanner"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
