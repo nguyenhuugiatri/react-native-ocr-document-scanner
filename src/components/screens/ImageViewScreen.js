@@ -4,6 +4,8 @@ import {Container, Content, Text, Footer, Button, FooterTab} from 'native-base';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
+import Share from 'react-native-share';
+import fs from 'react-native-fs';
 
 import * as actionType from './../../redux/actionType';
 
@@ -58,6 +60,9 @@ class ImageViewScreen extends Component {
             <Button style={styles.button} onPress={this.performOcrButtonTapped}>
               <Text style={styles.text}>OCR</Text>
             </Button>
+            <Button style={styles.button} onPress={this.shareButtonTapped}>
+              <Text style={styles.text}>Share</Text>
+            </Button>
             <Button style={styles.button} onPress={this.deleteButtonTapped}>
               <Text style={styles.text}>Delete</Text>
             </Button>
@@ -66,6 +71,24 @@ class ImageViewScreen extends Component {
       </Container>
     );
   }
+
+  shareButtonTapped = async () => {
+    const {page} = this.state;
+    const EXTENSION = '.jpg';
+    this.showSpinner();
+    try {
+      const imageUri = page.documentImageFileUri;
+      const pos = imageUri.indexOf(EXTENSION) + EXTENSION.length;
+      const imageUrl = imageUri.substring(0, pos);
+      const base64 = await fs.readFile(imageUrl, 'base64');
+      const shareOptions = {
+        url: `data:image/jpg;base64,${base64}`,
+      };
+      await Share.open(shareOptions);
+    } finally {
+      this.hideSpinner();
+    }
+  };
 
   saveAsPdfButtonTapped = async () => {
     const {page} = this.state;
@@ -157,6 +180,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     color: '#ededed',
+    textAlign: 'center',
   },
   button: {
     backgroundColor: '#464159',
