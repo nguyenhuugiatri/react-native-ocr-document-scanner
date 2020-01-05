@@ -1,6 +1,5 @@
 package com.hcmus_nmcnpm_ocrscanner;
-
-import cl.json.RNSharePackage;
+
 import cl.json.ShareApplication;
 import android.app.Application;
 import android.content.Context;

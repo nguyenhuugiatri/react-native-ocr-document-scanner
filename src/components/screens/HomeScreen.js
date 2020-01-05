@@ -23,7 +23,7 @@ class HomeScreen extends Component {
             block
             style={styles.button}
             onPress={this.startDocumentScannerButtonTapped}>
-            <Text style={styles.text}>Scan Documents</Text>
+            <Text style={styles.text}>Take Photo</Text>
           </Button>
           <Button
             block
@@ -32,13 +32,13 @@ class HomeScreen extends Component {
             <Text style={styles.text}>Gallery</Text>
           </Button>
           <Button block style={styles.button}>
-            <Text style={styles.text}>Do later</Text>
+            <Text style={styles.text}>Account</Text>
           </Button>
           <Button block style={styles.button}>
-            <Text style={styles.text}>Do later</Text>
+            <Text style={styles.text}>Upload</Text>
           </Button>
           <Button block style={styles.button}>
-            <Text style={styles.text}>Do later</Text>
+            <Text style={styles.text}>Download</Text>
           </Button>
         </Content>
       </Container>
