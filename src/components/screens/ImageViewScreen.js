@@ -86,6 +86,8 @@ class ImageViewScreen extends Component {
       const shareOptions = {
         url: `data:image/jpg;base64,${base64}`,
       };
+      //this.showAlert('PDF file created', shareOptions, true);
+
       await Share.open(shareOptions);
     } finally {
       this.hideSpinner();
