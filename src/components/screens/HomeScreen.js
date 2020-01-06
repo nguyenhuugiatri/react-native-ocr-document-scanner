@@ -12,7 +12,7 @@ import * as actionType from './../../redux/actionType';
 
 class HomeScreen extends Component {
   static navigationOptions = {
-    title: 'OCR SCANNER',
+    title: 'Home',
   };
 
   render() {
@@ -37,7 +37,7 @@ class HomeScreen extends Component {
             onPress={this.viewAccountButtonTapped}>
             <Text style={styles.text}>Account</Text>
           </Button>
-          <Button block style={styles.button}>
+          <Button block style={styles.button} >
             <Text style={styles.text}>Upload</Text>
           </Button>
           <Button block style={styles.button}>
@@ -55,6 +55,7 @@ class HomeScreen extends Component {
   viewAccountButtonTapped = async () => {
     this.gotoAccountScreen();
   };
+
 
   startDocumentScannerButtonTapped = async () => {
     const result = await ScanbotSDK.UI.startDocumentScanner({
@@ -78,6 +79,7 @@ class HomeScreen extends Component {
   gotoAccountScreen = () => {
     this.props.navigation.push('Account');
   };
+
 }
 
 const styles = StyleSheet.create({

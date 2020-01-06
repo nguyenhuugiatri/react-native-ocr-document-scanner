@@ -11,6 +11,7 @@ import HomeScreen from './src/components/screens/HomeScreen';
 import ImageResultsScreen from './src/components/screens/ImageResultsScreen';
 import ImageViewScreen from './src/components/screens/ImageViewScreen';
 import AccountScreen from './src/components/screens/AccountScreen';
+import LoginScreen from './src/components/screens/LoginScreen';
 
 const SDK_LICENSE_KEY =
   'mUI1geNDOHudUYHokX4EyschlOqx6D' +
@@ -31,13 +32,14 @@ const SDK_LICENSE_KEY =
 
 const MainStack = createStackNavigator(
   {
+    Login: LoginScreen,
     Home: HomeScreen,
     ImageResults: ImageResultsScreen,
     ImageView: ImageViewScreen,
     Account: AccountScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#f28080',

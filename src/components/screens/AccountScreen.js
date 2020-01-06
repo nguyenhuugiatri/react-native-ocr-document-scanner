@@ -46,8 +46,12 @@ class AccountScreen extends Component {
     };
 
     logoutTapped = async () => {
-
+        this.gotoLoginScreen();
     };
+
+    gotoLoginScreen = () => {
+        this.props.navigation.push('Login');
+    }
 
     
 }
