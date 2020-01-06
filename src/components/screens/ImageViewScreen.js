@@ -10,6 +10,7 @@ import fs from 'react-native-fs';
 //import cropImage from '../../../asset/crop.PNG'
 
 import * as actionType from './../../redux/actionType';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class ImageViewScreen extends Component {
   static navigationOptions = {
@@ -50,23 +51,21 @@ class ImageViewScreen extends Component {
           </View>
         </Content>
         <Footer>
-          <FooterTab>
+          <FooterTab style={{backgroundColor:"#f28080"}}>
             <Button style={styles.button} onPress={this.saveAsPdfButtonTapped}>
-              <Text style={styles.text}>Save as PDF</Text>
+              <Image style={styles.picture} source= {require('./../../../images/pdf.png')} />
             </Button>
-            <Button style={styles.button}>
-              <Text style={styles.text} onPress={this.cropButtonTapped}>
-                Crop
-              </Text>
+            <Button style={styles.button} onPress={this.cropButtonTapped}>
+            <Image style={styles.picture} source= {require('./../../../images/crop.png')} />
             </Button>
             <Button style={styles.button} onPress={this.performOcrButtonTapped}>
-              <Text style={styles.text}>OCR</Text>
+            <Image style={styles.picture} source= {require('./../../../images/scan.png')} />
             </Button>
             <Button style={styles.button} onPress={this.shareButtonTapped}>
-              <Text style={styles.text}>Share</Text>
+            <Image style={styles.picture} source= {require('./../../../images/share.png')} />
             </Button>
             <Button style={styles.button} onPress={this.deleteButtonTapped}>
-              <Text style={styles.text}>Delete</Text>
+            <Image style={styles.picture} source= {require('./../../../images/delete.png')} />
             </Button>
           </FooterTab>
         </Footer>
@@ -176,8 +175,8 @@ const styles = StyleSheet.create({
   },
   documentImage: {
     flex: 1,
-    width: Dimensions.get('window').width - 20,
-    height: Dimensions.get('window').height / 2,
+    width: Dimensions.get('window').width - 10,
+    height: Dimensions.get('window').height / 3 * 2,
     resizeMode: 'contain',
   },
   text: {
@@ -187,7 +186,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#464159',
+    backgroundColor: '#f28080',
+    justifyContent: 'center',
+    textTransform: 'none',
+    borderRadius: 45,
+    flex: 1,
+    width:70,
+    padding:5,
+    alignContent: 'center',
+    borderColor: '#080',
+  },
+  picture: {
+    resizeMode: 'contain',
+    width: 35,
+    height: 20,
+    flex: 1,
+    alignSelf: 'center'
   },
 });
 

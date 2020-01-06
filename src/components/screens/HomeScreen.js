@@ -81,17 +81,22 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#8bbabb',
-    margin: 10,
-    //rounded: 10,
-  },
-  text: {
-    fontSize: 13,
-    fontWeight: 'bold',
-    color: '#ededed',
-    textAlign: 'center',
-  },
+  button:{
+    backgroundColor: '#f28080',
+    justifyContent: 'center',
+    margin: 15,
+    textTransform: 'none',
+    borderRadius: 45,
+},
+text:{
+    fontSize: 19,
+fontWeight: 'bold',
+color: '#000000',
+textAlign: 'center',
+justifyContent:'center',
+alignSelf: 'center',
+alignItems: 'center',
+},
 });
 
 const mapDispatchToProps = dispatch => {

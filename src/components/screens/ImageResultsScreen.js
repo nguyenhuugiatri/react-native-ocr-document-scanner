@@ -40,7 +40,7 @@ class ImageResultsScreen extends Component {
           </View>
         </Content>
         <Footer>
-          <FooterTab>
+          <FooterTab style={{backgroundColor:"#f28080"}}>
             <Button style={styles.button}>
               <Text style={styles.text} onPress={this.saveAsPdfButtonTapped}>
                 Save all as PDF
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#464159',
+    backgroundColor: '#f28080',
   },
 });
 

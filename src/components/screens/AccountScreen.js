@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 20,
         textTransform: 'none',
+        borderRadius: 45,
     },
     text:{
         fontSize: 19,
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         height: 100,
+        resizeMode: 'stretch'
     }
 })
 // export default class AccountImage extends Component {
