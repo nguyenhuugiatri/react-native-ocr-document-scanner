@@ -10,6 +10,7 @@ import Store from './src/redux/store';
 import HomeScreen from './src/components/screens/HomeScreen';
 import ImageResultsScreen from './src/components/screens/ImageResultsScreen';
 import ImageViewScreen from './src/components/screens/ImageViewScreen';
+import AccountScreen from './src/components/screens/AccountScreen';
 
 const SDK_LICENSE_KEY =
   'mUI1geNDOHudUYHokX4EyschlOqx6D' +
@@ -33,6 +34,7 @@ const MainStack = createStackNavigator(
     Home: HomeScreen,
     ImageResults: ImageResultsScreen,
     ImageView: ImageViewScreen,
+    Account: AccountScreen,
   },
   {
     initialRouteName: 'Home',

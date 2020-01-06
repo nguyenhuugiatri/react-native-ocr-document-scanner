@@ -31,7 +31,10 @@ class HomeScreen extends Component {
             onPress={this.viewImageResultsButtonTapped}>
             <Text style={styles.text}>Gallery</Text>
           </Button>
-          <Button block style={styles.button}>
+          <Button 
+            block 
+            style={styles.button}
+            onPress={this.viewAccountButtonTapped}>
             <Text style={styles.text}>Account</Text>
           </Button>
           <Button block style={styles.button}>
@@ -47,6 +50,10 @@ class HomeScreen extends Component {
 
   viewImageResultsButtonTapped = async () => {
     this.gotoImageResults();
+  };
+
+  viewAccountButtonTapped = async () => {
+    this.gotoAccountScreen();
   };
 
   startDocumentScannerButtonTapped = async () => {
@@ -67,12 +74,17 @@ class HomeScreen extends Component {
   gotoImageResults = () => {
     this.props.navigation.push('ImageResults');
   };
+
+  gotoAccountScreen = () => {
+    this.props.navigation.push('Account');
+  };
 }
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#8bbabb',
     margin: 10,
+    //rounded: 10,
   },
   text: {
     fontSize: 13,

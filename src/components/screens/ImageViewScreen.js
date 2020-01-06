@@ -7,6 +7,8 @@ import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
 import Share from 'react-native-share';
 import fs from 'react-native-fs';
 
+//import cropImage from '../../../asset/crop.PNG'
+
 import * as actionType from './../../redux/actionType';
 
 class ImageViewScreen extends Component {
