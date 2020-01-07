@@ -31,13 +31,13 @@ class HomeScreen extends Component {
             onPress={this.viewImageResultsButtonTapped}>
             <Text style={styles.text}>Gallery</Text>
           </Button>
-          <Button 
-            block 
+          <Button
+            block
             style={styles.button}
             onPress={this.viewAccountButtonTapped}>
             <Text style={styles.text}>Account</Text>
           </Button>
-          <Button block style={styles.button} >
+          <Button block style={styles.button}>
             <Text style={styles.text}>Upload</Text>
           </Button>
           <Button block style={styles.button}>
@@ -55,7 +55,6 @@ class HomeScreen extends Component {
   viewAccountButtonTapped = async () => {
     this.gotoAccountScreen();
   };
-
 
   startDocumentScannerButtonTapped = async () => {
     const result = await ScanbotSDK.UI.startDocumentScanner({
@@ -79,26 +78,25 @@ class HomeScreen extends Component {
   gotoAccountScreen = () => {
     this.props.navigation.push('Account');
   };
-
 }
 
 const styles = StyleSheet.create({
-  button:{
+  button: {
     backgroundColor: '#f28080',
     justifyContent: 'center',
     margin: 15,
     textTransform: 'none',
     borderRadius: 45,
-},
-text:{
+  },
+  text: {
     fontSize: 19,
-fontWeight: 'bold',
-color: '#000000',
-textAlign: 'center',
-justifyContent:'center',
-alignSelf: 'center',
-alignItems: 'center',
-},
+    fontWeight: 'bold',
+    color: '#000000',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
 });
 
 const mapDispatchToProps = dispatch => {
