@@ -39,6 +39,7 @@ router.post('/login', async (req, res) => {
     if (user === null) return res.status(404).send('Not found');
     const rs = bcrypt.compareSync(password, user.password);
     if (!rs) return res.status(403).send('Wrong password');
+    delete user.password;
     return res.send({message: 'Login success', user});
   } catch (error) {
     return res.status(403).send(error);

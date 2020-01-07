@@ -1,33 +1,53 @@
 import React, {Component} from 'react';
-import {StyleSheet, Platform, Dimensions, Image} from 'react-native';
-import {
-  Container,
-  View,
-  Header,
-  Content,
-  Button,
-  Text,
-  Icon,
-} from 'native-base';
+import {StyleSheet, Image} from 'react-native';
+import {View, Button, Text} from 'native-base';
 import {connect} from 'react-redux';
 import * as actionType from './../../redux/actionType';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {AsyncStorage} from 'react-native';
+import Avatar from './../../../images/avatar.png';
 
 class AccountScreen extends Component {
   static navigationOptions = {
     title: 'Account',
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      user: null,
+    };
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('user').then(user => {
+      this.setState({
+        isLoading: false,
+        user: JSON.parse(user),
+      });
+    });
+  }
+
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
+    }
     return (
       <View style={styles.big}>
         <View style={styles.layout}>
           <Image
             style={styles.picture}
-            source={require('./../../../images/account.png')}
+            width={370}
+            height={200}
+            marginTop={20}
+            source={Avatar}
           />
           <Text flex={1} style={styles.username}>
-            NgVanA
+            {this.state.user.fullname}
           </Text>
         </View>
         <View style={styles.layout2}>
@@ -57,6 +77,17 @@ class AccountScreen extends Component {
 
   gotoLoginScreen = () => {
     this.props.navigation.push('Login');
+  };
+
+  getUser = async () => {
+    try {
+      const user = await AsyncStorage.getItem('user');
+      if (user !== null) {
+        return JSON.parse(user);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
@@ -94,6 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
+    padding: 10,
   },
   big: {
     backgroundColor: '#f000',

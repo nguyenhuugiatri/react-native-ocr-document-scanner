@@ -93,7 +93,7 @@ function login(user, navigation, state) {
     data: user,
   })
     .then(async result => {
-      await AsyncStorage.setItem('user', JSON.stringify(result.data));
+      await AsyncStorage.setItem('user', JSON.stringify(result.data.user));
       navigation.push('Home');
     })
     .catch(err => {
