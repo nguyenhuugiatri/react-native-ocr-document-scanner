@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, View, Dimensions, Alert} from 'react-native';
+import {Image, StyleSheet, View, Dimensions, Alert, Picker} from 'react-native';
 import {Container, Content, Text, Footer, Button, FooterTab} from 'native-base';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -28,6 +28,7 @@ class ImageViewScreen extends Component {
     this.state = {
       page: this.props.navigation.getParam('page'),
       spinnerVisible: false,
+      language: 'en',
     };
   }
 
@@ -55,6 +56,17 @@ class ImageViewScreen extends Component {
             />
           </View>
         </Content>
+        <View>
+          <Picker
+            selectedValue={this.state.language}
+            style={styles.picker}
+            onValueChange={(itemValue, itemIndex) =>
+              this.setState({language: itemValue})
+            }>
+            <Picker.Item label="English" value="en" />
+            <Picker.Item label="Vietnamese" value="vi" />
+          </Picker>
+        </View>
         <Footer>
           <FooterTab style={{backgroundColor: '#f28080'}}>
             <Button style={styles.button} onPress={this.saveAsPdfButtonTapped}>
@@ -118,9 +130,13 @@ class ImageViewScreen extends Component {
       const imageUris = [
         page.documentImageFileUri || page.originalImageFileUri,
       ];
-      const result = await ScanbotSDK.performOCR(imageUris, ['vi', 'en'], {
-        outputFormat: 'PLAIN_TEXT',
-      });
+      const result = await ScanbotSDK.performOCR(
+        imageUris,
+        [this.state.language],
+        {
+          outputFormat: 'PLAIN_TEXT',
+        },
+      );
       this.showAlert('OCR Result', result.plainText, true);
     } finally {
       this.hideSpinner();
@@ -172,6 +188,7 @@ class ImageViewScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  picker: {height: 50, width: '100%'},
   content: {
     flex: 1,
     justifyContent: 'center',
