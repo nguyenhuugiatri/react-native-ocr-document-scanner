@@ -3,10 +3,10 @@ import {Alert} from 'react-native';
 import {Page} from 'react-native-scanbot-sdk';
 import thunk from 'redux-thunk';
 import axios from 'axios';
+import {AsyncStorage} from 'react-native';
 
 export type ScannedPagesState = {
   pages: Page[],
-  user: null,
 };
 
 const LOCAL_IP = '192.168.1.9';
@@ -24,7 +24,9 @@ const reducer = (state: ScannedPagesState = {pages: []}, action) => {
     case actionType.ACTION_UPDATE_OR_ADD_PAGE:
       return updateOrAddPage(action.page, state);
     case actionType.ACTION_SIGN_UP:
-      return signUp(action.user, state);
+      return signUp(action.user, action.navigation, state);
+    case actionType.ACTION_LOGIN:
+      return login(action.user, action.navigation, state);
     default:
       return state;
   }
@@ -67,7 +69,7 @@ function updateOrAddPage(
   return {pages};
 }
 
-function signUp(user, state) {
+function signUp(user, navigation, state) {
   axios({
     method: 'post',
     url: `http://${LOCAL_IP}:3000/account/signup`,
@@ -76,6 +78,23 @@ function signUp(user, state) {
     .then(result => {
       console.log(result.data);
       showAlert('Congratulations', `${result.data}`);
+      navigation.goBack();
+    })
+    .catch(err => {
+      console.log(err.response.data);
+      showAlert('Warning !', `${err.response.data}`);
+    });
+}
+
+function login(user, navigation, state) {
+  axios({
+    method: 'post',
+    url: `http://${LOCAL_IP}:3000/account/login`,
+    data: user,
+  })
+    .then(async result => {
+      await AsyncStorage.setItem('user', JSON.stringify(result.data));
+      navigation.push('Home');
     })
     .catch(err => {
       console.log(err.response.data);

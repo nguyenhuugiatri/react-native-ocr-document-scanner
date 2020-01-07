@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Image, TextInput} from 'react-native';
+import {StyleSheet, Image, TextInput, Alert} from 'react-native';
 import {View, Button, Text} from 'native-base';
 import {connect} from 'react-redux';
 import * as actionType from './../../redux/actionType';
@@ -13,8 +13,8 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
-      pass: '',
+      username: '',
+      password: '',
     };
   }
 
@@ -30,17 +30,18 @@ class LoginScreen extends Component {
           <TextInput
             placeholder="Username"
             style={styles.input}
-            onChangeText={text => this.setState({text})}
-            value={this.state.text}
+            onChangeText={username => this.setState({username})}
           />
           <TextInput
             placeholder="Password"
             style={styles.input}
             secureTextEntry={true}
-            onChangeText={pass => this.setState({pass})}
-            value={this.state.pass}
+            onChangeText={password => this.setState({password})}
           />
-          <Button block style={styles.button} onPress={this.LoginTapped}>
+          <Button
+            block
+            style={styles.button}
+            onPress={() => this.submit(this.state, this.props.navigation)}>
             <Text style={styles.text}>Sign In</Text>
           </Button>
           <Button block style={styles.button} onPress={this.singupButtonTaped}>
@@ -51,8 +52,16 @@ class LoginScreen extends Component {
     );
   }
 
-  LoginTapped = async () => {
-    this.gotoHomeScreen();
+  submit = (user, navigation) => {
+    if (!user.username || user.username.trim().length === 0) {
+      this.showAlert('Warning !', 'Username is required');
+      return;
+    }
+    if (!user.password || user.password.trim().length === 0) {
+      this.showAlert('Warning !', 'Password is required');
+      return;
+    }
+    this.props.login(user, navigation);
   };
 
   singupButtonTaped = () => {
@@ -65,6 +74,16 @@ class LoginScreen extends Component {
 
   goToSignUpScreen = () => {
     this.props.navigation.push('SignUp');
+  };
+
+  showAlert = (title: string, message: string, delayed: boolean = false) => {
+    if (delayed) {
+      setTimeout(() => {
+        Alert.alert(title, message);
+      }, 200);
+    } else {
+      Alert.alert(title, message);
+    }
   };
 }
 
@@ -134,8 +153,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addScannedPages: (pages: Page[]) =>
-      dispatch({type: actionType.ACTION_ADD_PAGES, pages: pages}),
+    login: (user, navigation) =>
+      dispatch({type: actionType.ACTION_LOGIN, user, navigation}),
   };
 };
 

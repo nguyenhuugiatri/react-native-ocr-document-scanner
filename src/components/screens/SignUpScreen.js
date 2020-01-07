@@ -58,7 +58,7 @@ class LoginScreen extends Component {
           <Button
             block
             style={styles.button}
-            onPress={() => this.submit(this.state)}>
+            onPress={() => this.submit(this.state, this.props.navigation)}>
             <Text style={styles.text}>Sign Up</Text>
           </Button>
         </View>
@@ -76,7 +76,7 @@ class LoginScreen extends Component {
     }
   };
 
-  submit = user => {
+  submit = (user, navigation) => {
     if (!user.username || user.username.trim().length === 0) {
       this.showAlert('Warning !', 'Username is required');
       return;
@@ -97,7 +97,7 @@ class LoginScreen extends Component {
       this.showAlert('Warning !', 'Phone is required');
       return;
     }
-    this.props.signUp(user);
+    this.props.signUp(user, navigation);
   };
 
   LoginTapped = async () => {
@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUp: user => dispatch({type: actionType.ACTION_SIGN_UP, user}),
+    signUp: (user, navigation) =>
+      dispatch({type: actionType.ACTION_SIGN_UP, user, navigation}),
   };
 };
 
