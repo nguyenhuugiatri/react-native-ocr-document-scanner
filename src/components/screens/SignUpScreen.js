@@ -1,48 +1,60 @@
 import React, {Component} from 'react';
-import {StyleSheet, Image, TextInput} from 'react-native';
+import {StyleSheet, TextInput} from 'react-native';
 import {View, Button, Text} from 'native-base';
 import {connect} from 'react-redux';
 import * as actionType from './../../redux/actionType';
-import CoverImage from './../../../images/cover.png';
 
 class LoginScreen extends Component {
   static navigationOptions = {
-    title: 'Login',
+    title: 'Sign Up',
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
-      pass: '',
+      username: '',
+      password: '',
+      fullname: '',
+      email: '',
+      phone: '',
     };
   }
 
   render() {
     return (
       <View style={styles.layout}>
-        <View style={styles.coverLayout}>
-          <Image style={styles.coverPicture} source={CoverImage} />
-          <Text style={styles.coverText}>OCR Scanning</Text>
-        </View>
-
         <View style={styles.inforLayout}>
           <TextInput
             placeholder="Username"
             style={styles.input}
-            onChangeText={text => this.setState({text})}
-            value={this.state.text}
+            onChangeText={username => this.setState({username})}
+            value={this.state.username}
           />
           <TextInput
             placeholder="Password"
             style={styles.input}
             secureTextEntry={true}
-            onChangeText={pass => this.setState({pass})}
-            value={this.state.pass}
+            onChangeText={password => this.setState({password})}
+            value={this.state.password}
           />
-          <Button block style={styles.button} onPress={this.LoginTapped}>
-            <Text style={styles.text}>Sign In</Text>
-          </Button>
+          <TextInput
+            placeholder="Full Name"
+            style={styles.input}
+            onChangeText={fullname => this.setState({fullname})}
+            value={this.state.fullname}
+          />
+          <TextInput
+            placeholder="Email"
+            style={styles.input}
+            onChangeText={email => this.setState({email})}
+            value={this.state.email}
+          />
+          <TextInput
+            placeholder="Phone Number"
+            style={styles.input}
+            onChangeText={phone => this.setState({phone})}
+            value={this.state.phone}
+          />
           <Button block style={styles.button} onPress={this.singupButtonTaped}>
             <Text style={styles.text}>Sign Up</Text>
           </Button>
@@ -56,15 +68,11 @@ class LoginScreen extends Component {
   };
 
   singupButtonTaped = () => {
-    this.goToSignUpScreen();
+    //TODO
   };
 
   gotoHomeScreen = () => {
     this.props.navigation.push('Home');
-  };
-
-  goToSignUpScreen = () => {
-    this.props.navigation.push('SignUp');
   };
 }
 
@@ -79,18 +87,6 @@ const styles = StyleSheet.create({
   inforLayout: {
     flex: 1,
     padding: 20,
-  },
-  coverPicture: {
-    alignContent: 'center',
-    alignSelf: 'center',
-    resizeMode: 'stretch',
-  },
-  coverText: {
-    alignSelf: 'center',
-    alignContent: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
-    margin: 10,
   },
   input: {
     height: 40,
@@ -121,14 +117,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
-  },
-  inputPass: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 45,
-    alignContent: 'center',
-    justifyContent: 'center',
   },
 });
 

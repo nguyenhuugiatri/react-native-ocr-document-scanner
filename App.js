@@ -12,6 +12,7 @@ import ImageResultsScreen from './src/components/screens/ImageResultsScreen';
 import ImageViewScreen from './src/components/screens/ImageViewScreen';
 import AccountScreen from './src/components/screens/AccountScreen';
 import LoginScreen from './src/components/screens/LoginScreen';
+import SignUpScreen from './src/components/screens/SignUpScreen';
 
 const SDK_LICENSE_KEY =
   'mUI1geNDOHudUYHokX4EyschlOqx6D' +
@@ -33,6 +34,7 @@ const SDK_LICENSE_KEY =
 const MainStack = createStackNavigator(
   {
     Login: LoginScreen,
+    SignUp: SignUpScreen,
     Home: HomeScreen,
     ImageResults: ImageResultsScreen,
     ImageView: ImageViewScreen,
