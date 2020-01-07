@@ -4,10 +4,7 @@ const userModel = require('../models/user.model');
 
 const router = express.Router();
 
-router.get('/register', async (req, res) => {
-});
-
-router.post('/register', async (req, res) => {
+router.post('/signup', async (req, res) => {
 });
 
 module.exports = router;

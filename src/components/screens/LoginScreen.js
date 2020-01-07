@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {StyleSheet, Platform, Image, TextInput} from 'react-native';
 import {View, Header, Content, Button, Text, Icon} from 'native-base';
 import {connect} from 'react-redux';
-
 import * as actionType from './../../redux/actionType';
+import CoverImage from './../../../images/cover.png';
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -22,10 +22,7 @@ class LoginScreen extends Component {
     return (
       <View style={styles.layout}>
         <View style={styles.coverLayout}>
-          <Image
-            style={styles.coverPicture}
-            source={require('./../../../images/cover.png')}
-          />
+          <Image style={styles.coverPicture} source={CoverImage} />
           <Text style={styles.coverText}>OCR Scanning</Text>
         </View>
 

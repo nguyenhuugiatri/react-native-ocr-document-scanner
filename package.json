@@ -5,7 +5,9 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "serv":"cd server/ && npm start",
     "start": "react-native start",
+    "dev":"npm run serv & npm start",
     "test": "jest",
     "lint": "eslint ."
   },

@@ -6,11 +6,16 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import ScanbotSDK, {Page} from 'react-native-scanbot-sdk';
 import Share from 'react-native-share';
 import fs from 'react-native-fs';
+import PDFIcon from './../../../images/pdf.png';
+import CropIcon from './../../../images/crop.png';
+import ScanIcon from './../../../images/scan.png';
+import ShareIcon from './../../../images/share.png';
+import DeleteIcon from './../../../images/delete.png';
 
 //import cropImage from '../../../asset/crop.PNG'
 
 import * as actionType from './../../redux/actionType';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 class ImageViewScreen extends Component {
   static navigationOptions = {
@@ -51,21 +56,21 @@ class ImageViewScreen extends Component {
           </View>
         </Content>
         <Footer>
-          <FooterTab style={{backgroundColor:"#f28080"}}>
+          <FooterTab style={{backgroundColor: '#f28080'}}>
             <Button style={styles.button} onPress={this.saveAsPdfButtonTapped}>
-              <Image style={styles.picture} source= {require('./../../../images/pdf.png')} />
+              <Image style={styles.picture} source={PDFIcon} />
             </Button>
             <Button style={styles.button} onPress={this.cropButtonTapped}>
-            <Image style={styles.picture} source= {require('./../../../images/crop.png')} />
+              <Image style={styles.picture} source={CropIcon} />
             </Button>
             <Button style={styles.button} onPress={this.performOcrButtonTapped}>
-            <Image style={styles.picture} source= {require('./../../../images/scan.png')} />
+              <Image style={styles.picture} source={ScanIcon} />
             </Button>
             <Button style={styles.button} onPress={this.shareButtonTapped}>
-            <Image style={styles.picture} source= {require('./../../../images/share.png')} />
+              <Image style={styles.picture} source={ShareIcon} />
             </Button>
             <Button style={styles.button} onPress={this.deleteButtonTapped}>
-            <Image style={styles.picture} source= {require('./../../../images/delete.png')} />
+              <Image style={styles.picture} source={DeleteIcon} />
             </Button>
           </FooterTab>
         </Footer>
@@ -176,7 +181,7 @@ const styles = StyleSheet.create({
   documentImage: {
     flex: 1,
     width: Dimensions.get('window').width - 10,
-    height: Dimensions.get('window').height / 3 * 2,
+    height: (Dimensions.get('window').height / 3) * 2,
     resizeMode: 'contain',
   },
   text: {
@@ -191,8 +196,8 @@ const styles = StyleSheet.create({
     textTransform: 'none',
     borderRadius: 45,
     flex: 1,
-    width:70,
-    padding:5,
+    width: 70,
+    padding: 5,
     alignContent: 'center',
     borderColor: '#080',
   },
@@ -201,7 +206,7 @@ const styles = StyleSheet.create({
     width: 35,
     height: 20,
     flex: 1,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
 });
 
