@@ -31,12 +31,14 @@ class LoginScreen extends Component {
             placeholder="Username"
             style={styles.input}
             onChangeText={username => this.setState({username})}
+            clearButtonMode="always"
           />
           <TextInput
             placeholder="Password"
             style={styles.input}
             secureTextEntry={true}
             onChangeText={password => this.setState({password})}
+            clearButtonMode="always"
           />
           <Button
             block

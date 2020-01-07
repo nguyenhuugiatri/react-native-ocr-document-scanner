@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import * as actionType from './../../redux/actionType';
 import {AsyncStorage} from 'react-native';
 import Avatar from './../../../images/avatar.png';
+import {NavigationActions, StackActions} from 'react-navigation';
 
 class AccountScreen extends Component {
   static navigationOptions = {
@@ -72,22 +73,19 @@ class AccountScreen extends Component {
   feedbackTapped = async () => {};
 
   logoutTapped = async () => {
-    this.gotoLoginScreen();
-  };
-
-  gotoLoginScreen = () => {
-    this.props.navigation.push('Login');
-  };
-
-  getUser = async () => {
-    try {
-      const user = await AsyncStorage.getItem('user');
-      if (user !== null) {
-        return JSON.parse(user);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    AsyncStorage.removeItem('user', err => {
+      console.log(err);
+    });
+    this.props.navigation.dispatch(
+      StackActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Main',
+          }),
+        ],
+      }),
+    );
   };
 }
 
@@ -139,23 +137,5 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
 });
-// export default class AccountImage extends Component {
-//     render() {
-//         return (
-//             <View>
-//                 <Image source={require('./../../../images/account.png')} />
-//             </View>
-//         );
-//     }
-// }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    removeScannedPage: (page: Page) =>
-      dispatch({type: actionType.ACTION_REMOVE_PAGE, page: page}),
-    updateScannedPage: (page: Page) =>
-      dispatch({type: actionType.ACTION_UPDATE_OR_ADD_PAGE, page: page}),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(AccountScreen);
+export default connect(null, null)(AccountScreen);
