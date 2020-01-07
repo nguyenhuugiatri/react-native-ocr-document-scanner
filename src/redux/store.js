@@ -1,9 +1,15 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import {Alert} from 'react-native';
 import {Page} from 'react-native-scanbot-sdk';
+import thunk from 'redux-thunk';
+import axios from 'axios';
 
 export type ScannedPagesState = {
   pages: Page[],
+  user: null,
 };
+
+const LOCAL_IP = '192.168.1.9';
 
 import * as actionType from './actionType';
 
@@ -17,6 +23,8 @@ const reducer = (state: ScannedPagesState = {pages: []}, action) => {
       return removePage(action.page, state);
     case actionType.ACTION_UPDATE_OR_ADD_PAGE:
       return updateOrAddPage(action.page, state);
+    case actionType.ACTION_SIGN_UP:
+      return signUp(action.user, state);
     default:
       return state;
   }
@@ -59,4 +67,30 @@ function updateOrAddPage(
   return {pages};
 }
 
-export default createStore(reducer);
+function signUp(user, state) {
+  axios({
+    method: 'post',
+    url: `http://${LOCAL_IP}:3000/account/signup`,
+    data: user,
+  })
+    .then(result => {
+      console.log(result.data);
+      showAlert('Congratulations', `${result.data}`);
+    })
+    .catch(err => {
+      console.log(err.response.data);
+      showAlert('Warning !', `${err.response.data}`);
+    });
+}
+
+function showAlert(title: string, message: string, delayed: boolean = false) {
+  if (delayed) {
+    setTimeout(() => {
+      Alert.alert(title, message);
+    }, 200);
+  } else {
+    Alert.alert(title, message);
+  }
+}
+
+export default createStore(reducer, applyMiddleware(thunk));

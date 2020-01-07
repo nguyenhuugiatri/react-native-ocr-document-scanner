@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
+import {StyleSheet, TextInput, Alert} from 'react-native';
 import {View, Button, Text} from 'native-base';
 import {connect} from 'react-redux';
 import * as actionType from './../../redux/actionType';
@@ -55,7 +55,10 @@ class LoginScreen extends Component {
             onChangeText={phone => this.setState({phone})}
             value={this.state.phone}
           />
-          <Button block style={styles.button} onPress={this.singupButtonTaped}>
+          <Button
+            block
+            style={styles.button}
+            onPress={() => this.submit(this.state)}>
             <Text style={styles.text}>Sign Up</Text>
           </Button>
         </View>
@@ -63,12 +66,42 @@ class LoginScreen extends Component {
     );
   }
 
-  LoginTapped = async () => {
-    this.gotoHomeScreen();
+  showAlert = (title: string, message: string, delayed: boolean = false) => {
+    if (delayed) {
+      setTimeout(() => {
+        Alert.alert(title, message);
+      }, 200);
+    } else {
+      Alert.alert(title, message);
+    }
   };
 
-  singupButtonTaped = () => {
-    //TODO
+  submit = user => {
+    if (!user.username || user.username.trim().length === 0) {
+      this.showAlert('Warning !', 'Username is required');
+      return;
+    }
+    if (!user.password || user.password.trim().length === 0) {
+      this.showAlert('Warning !', 'Password is required');
+      return;
+    }
+    if (!user.fullname || user.fullname.trim().length === 0) {
+      this.showAlert('Warning !', 'Full name is required');
+      return;
+    }
+    if (!user.email || user.email.trim().length === 0) {
+      this.showAlert('Warning !', 'Email is required');
+      return;
+    }
+    if (!user.phone || user.phone.trim().length === 0) {
+      this.showAlert('Warning !', 'Phone is required');
+      return;
+    }
+    this.props.signUp(user);
+  };
+
+  LoginTapped = async () => {
+    this.gotoHomeScreen();
   };
 
   gotoHomeScreen = () => {
@@ -122,8 +155,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addScannedPages: (pages: Page[]) =>
-      dispatch({type: actionType.ACTION_ADD_PAGES, pages: pages}),
+    signUp: user => dispatch({type: actionType.ACTION_SIGN_UP, user}),
   };
 };
 
