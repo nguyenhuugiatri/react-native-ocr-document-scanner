@@ -13,6 +13,7 @@ import ImageViewScreen from './src/components/screens/ImageViewScreen';
 import AccountScreen from './src/components/screens/AccountScreen';
 import LoginScreen from './src/components/screens/LoginScreen';
 import SignUpScreen from './src/components/screens/SignUpScreen';
+import UploadScreen from './src/components/screens/UploadScreen';
 
 const SDK_LICENSE_KEY =
   'mUI1geNDOHudUYHokX4EyschlOqx6D' +
@@ -39,9 +40,10 @@ const MainStack = createStackNavigator(
     ImageResults: ImageResultsScreen,
     ImageView: ImageViewScreen,
     Account: AccountScreen,
+    Upload: UploadScreen,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Upload',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#f28080',

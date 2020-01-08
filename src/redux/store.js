@@ -9,7 +9,7 @@ export type ScannedPagesState = {
   pages: Page[],
 };
 
-const LOCAL_IP = '192.168.1.9';
+const LOCAL_IP = '192.168.1.2';
 
 import * as actionType from './actionType';
 

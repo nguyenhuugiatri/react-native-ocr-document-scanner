@@ -40,7 +40,7 @@ class ImageResultsScreen extends Component {
           </View>
         </Content>
         <Footer>
-          <FooterTab style={{backgroundColor:"#f28080"}}>
+          <FooterTab style={{backgroundColor: '#f28080'}}>
             <Button style={styles.button}>
               <Text style={styles.text} onPress={this.saveAsPdfButtonTapped}>
                 Save all as PDF
